@@ -16,7 +16,7 @@ from .serializers import (
 )
 
 
-class CreateAccountsView(generics.CreateAPIView):
+class CreateAccountsView(generics.ListCreateAPIView):
     queryset = Account.objects.all()
     serializer_class = AccountSerializer
 
