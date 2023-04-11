@@ -3,7 +3,7 @@ from rest_framework import serializers
 from .models import Account
 
 
-class AccountSeriazlizer(serializers.ModelSerializer):
+class AccountSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         return Account.objects.create_user(**validated_data)
 
@@ -11,35 +11,35 @@ class AccountSeriazlizer(serializers.ModelSerializer):
         model = Account
         fields = [
             "id",
-            "username",
             "email",
+            "username",
             "password",
-            "created_at",
-            "updated_at",
-            "is_active"
+            "date_joined",
+            "date_updated",
+            "is_active",
+            "is_staff",
         ]
-        read_only_fields = ["created_at", "updated_at", "is_active"]
+        read_only_fields = ["created_at", "updated_at"]
         extra_kwargs = {"password": {"write_only": True}}
+
 
 class LoginAccountSerializer(serializers.Serializer):
     username = serializers.CharField(write_only=True)
     password = serializers.CharField(write_only=True)
+
 
 class UpdateAccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
         fields = [
             "id",
-            "username",
             "email",
+            "username",
             "password",
-            "created_at",
-            "updated_at"
-        ]
-        read_only_fields = [
-            "id",
-            "created_at",
-            "updated_at",
+            "date_joined",
+            "date_updated",
             "is_active",
+            "is_staff",
         ]
-        extra_kwargs = {"password": {"write_only": True}}
+        read_only_fields = ["id", "created_at", "updated_at", "is_active", "is_staff"]
+        extra_kwargs = { "password": {"write_only": True}}

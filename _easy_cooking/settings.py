@@ -47,8 +47,8 @@ THIRD_PARTY_APPS = [
 
 MY_APPS = [
     "accounts",
-    "recipes",
-    "recipe_comments",
+    # "recipes",
+    # "recipe_comments",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + MY_APPS
@@ -80,6 +80,16 @@ TEMPLATES = [
         },
     },
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ]
+}
+
+AUTH_USER_MODEL = "accounts.Account"
 
 WSGI_APPLICATION = "_easy_cooking.wsgi.application"
 

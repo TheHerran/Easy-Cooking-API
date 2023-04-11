@@ -10,18 +10,7 @@ class CreateRecipesSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Recipe
-        fields = [
-            "id",
-            "title",
-            "img",
-            "rating",
-            "category",
-            "preparation",
-            "ingredients",
-            "user",
-            "created_at",
-            # "comments"
-        ]
+        fields = '__all__'
         read_only_fields = [
             "id",
             "created_at",
