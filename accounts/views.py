@@ -4,9 +4,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from utils.mixins import SerializerByMethodMixin
+from utils.permissions import IsProfileOwner
 
 from .models import Account
-from .permissions import IsProfileOwner
 from .serializers import (
     AccountSerializer,
     UpdateAccountSerializer,
