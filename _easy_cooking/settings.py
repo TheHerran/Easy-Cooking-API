@@ -48,7 +48,7 @@ THIRD_PARTY_APPS = [
 
 MY_APPS = [
     "accounts",
-    # "recipes",
+    "recipes",
     # "recipe_comments",
 ]
 

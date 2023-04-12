@@ -17,15 +17,17 @@ class Recipe(models.Model):
     img = models.CharField(max_length=512)
     ingredients = models.TextField()
     preparation = models.TextField()
-    rating = models.IntegerField()
+    rating = models.IntegerField(null=True)
     category = models.CharField(
-        max_length=20, choices=Category.choices, default=Category.DEFAULT
+        max_length=20,
+        choices=Category.choices,
+        default=Category.DEFAULT,
     )
     user = models.ForeignKey(
         "accounts.Account",
         on_delete=models.CASCADE,
         related_name="recipes",
-        null=True,
+        null=True
     )
     # comments = models.ForeignKey()
     created_at = models.DateTimeField(auto_now_add=True)
