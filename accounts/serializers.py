@@ -26,11 +26,6 @@ class AccountSerializer(serializers.ModelSerializer):
         }
 
 
-class LoginAccountSerializer(serializers.Serializer):
-    username = serializers.CharField(write_only=True)
-    password = serializers.CharField(write_only=True)
-
-
 class UpdateAccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
