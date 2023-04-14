@@ -16,10 +16,6 @@ class LoginJWTSerializer(TokenObtainPairSerializer):
 
 class AccountSerializer(serializers.ModelSerializer):
     recipes = RecipesSerializer(read_only=True, many=True)
-    
-    def create(self, validated_data):
-        return Account.objects.create_user(**validated_data)
-    
 
     class Meta:
         model = Account
@@ -29,6 +25,9 @@ class AccountSerializer(serializers.ModelSerializer):
             "password": {"write_only": True},
             "last_login": {"write_only": True},
         }
+
+    def create(self, validated_data):
+        return Account.objects.create_user(**validated_data)
 
 
 class UpdateAccountSerializer(serializers.ModelSerializer):

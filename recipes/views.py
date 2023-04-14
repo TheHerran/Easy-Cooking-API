@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from utils.permissions import IsRecipeOwner
 
 from .models import Recipe
-from .serializers import RecipesSerializer
+from .serializers import RecipesSerializer, RecipesUpdateSerializer
 
 
 class RecipeListCreateView(generics.ListCreateAPIView):
@@ -18,8 +18,14 @@ class RecipeListCreateView(generics.ListCreateAPIView):
 
 class RecipeRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Recipe.objects.all()
-    serializer_class = RecipesSerializer
+    serializer_class = RecipesUpdateSerializer
     permission_classes = [IsAuthenticatedOrReadOnly, IsRecipeOwner]
 
-    # def perform_destroy(self, instance):
-    #     instance.soft_delete()
+
+class RecipeListByUserView(generics.ListAPIView):
+    serializer_class = RecipesSerializer
+
+    def get_queryset(self):
+        user = self.kwargs["pk"]
+        queryset = Recipe.objects.filter(user=user)
+        return queryset
