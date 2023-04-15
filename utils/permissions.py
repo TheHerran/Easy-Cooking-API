@@ -10,7 +10,7 @@ class IsProfileOwner(permissions.BasePermission):
         return obj == request.user
 
 
-class IsRecipeOwner(permissions.BasePermission):
+class IsOwner(permissions.BasePermission):
     def has_object_permission(self, request: Request, view: View, obj: Recipe):
         if request.method in permissions.SAFE_METHODS:
             return True
