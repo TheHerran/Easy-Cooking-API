@@ -17,7 +17,6 @@ class Recipe(models.Model):
     img = models.CharField(max_length=512)
     ingredients = models.TextField()
     preparation = models.TextField()
-    # rating = models.IntegerField(null=True)
     category = models.CharField(
         max_length=20,
         choices=Category.choices,
