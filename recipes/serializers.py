@@ -11,7 +11,6 @@ class RecipesSerializer(serializers.ModelSerializer):
         read_only_fields = [
             "id",
             "created_at",
-            # "comments"
         ]
 
     def create(self, validated_data):
@@ -29,5 +28,4 @@ class RecipesUpdateSerializer(serializers.ModelSerializer):
             "created_at",
             "user",
             "rating",
-            # "comments"
         ]
