@@ -2,12 +2,12 @@ from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from recipes.serializers import RecipesSerializer
+from favorites.serializers import FavoriteSerializer
 
 from .models import Account
 
 
 class LoginJWTSerializer(TokenObtainPairSerializer):
-    @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
         token["username"] = user.username
@@ -16,6 +16,7 @@ class LoginJWTSerializer(TokenObtainPairSerializer):
 
 class AccountSerializer(serializers.ModelSerializer):
     recipes = RecipesSerializer(read_only=True, many=True)
+    favorites = FavoriteSerializer(read_only=True, many= True)
 
     class Meta:
         model = Account

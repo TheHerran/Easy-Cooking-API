@@ -50,7 +50,8 @@ MY_APPS = [
     "accounts",
     "recipes",
     "recipe_comments",
-    "ratings"
+    "ratings",
+    "favorites"
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + MY_APPS

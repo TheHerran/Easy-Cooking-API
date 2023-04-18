@@ -8,7 +8,7 @@ class Rating(models.Model):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["post", "user"], name="unique_recipe_user_rating"
+                fields=["recipe", "user"], name="unique_recipe_user_rating"
             )
         ]
 
