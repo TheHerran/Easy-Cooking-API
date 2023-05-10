@@ -1,7 +1,9 @@
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from django.shortcuts import get_object_or_404
 
 from utils.permissions import IsOwner
+from accounts.models import Account
 
 from .models import Recipe
 from .serializers import RecipesSerializer, RecipesUpdateSerializer
@@ -24,8 +26,10 @@ class RecipeRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
 
 class RecipeListByUserView(generics.ListAPIView):
     serializer_class = RecipesSerializer
+    lookup_field = "username"
 
     def get_queryset(self):
-        user = self.kwargs["pk"]
+        username = self.kwargs["username"]
+        user = get_object_or_404(Account, username=username)
         queryset = Recipe.objects.filter(user=user)
         return queryset
