@@ -15,7 +15,7 @@ class Recipe(models.Model):
     id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
     title = models.CharField(max_length=50)
     img = models.CharField(max_length=512)
-    ingredients = models.TextField()
+    # ingredients = models.TextField()
     preparation = models.TextField()
     category = models.CharField(
         max_length=20,

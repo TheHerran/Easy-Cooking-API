@@ -32,8 +32,9 @@ class CommentReplyCreateView(generics.CreateAPIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
+        recipe = get_object_or_404(Recipe, pk=self.kwargs["recipe_id"])
         parent_comment = get_object_or_404(Comment, pk=self.kwargs["comment_id"])
-        serializer.save(user=self.request.user, parent=parent_comment)
+        serializer.save(user=self.request.user, parent=parent_comment,  recipe=recipe,)
 
 
 class CommentReplyRetrieveDestroyView(generics.RetrieveDestroyAPIView):
