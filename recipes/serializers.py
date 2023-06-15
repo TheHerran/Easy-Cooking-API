@@ -10,6 +10,8 @@ from .models import Recipe
 class RecipesSerializer(serializers.ModelSerializer):
     rating = RatingSerializer(read_only=True, many=True)
     ingredients = IngredientSerializer(many=True)
+    username = serializers.SerializerMethodField()
+
 
     class Meta:
         model = Recipe
@@ -19,14 +21,20 @@ class RecipesSerializer(serializers.ModelSerializer):
             "created_at",
         ]
 
+    def get_username(self, obj):
+        return obj.user.username
+
+
     def create(self, validated_data):
         ingredients_data = validated_data.pop("ingredients")
-        recipe = Recipe.objects.create(user=self.context["request"].user, **validated_data)
+        recipe = Recipe.objects.create(
+            user=self.context["request"].user, **validated_data
+        )
         for ingredient_data in ingredients_data:
             Ingredient.objects.create(recipe=recipe, **ingredient_data)
         return recipe
-    
-    
+
+
 class RecipesRelationshipSerializer(serializers.ModelSerializer):
     rating = RatingSerializer(read_only=True, many=True)
 
@@ -38,7 +46,6 @@ class RecipesRelationshipSerializer(serializers.ModelSerializer):
 class RecipesUpdateSerializer(serializers.ModelSerializer):
     rating = RatingSerializer(read_only=True, many=True)
     ingredients = IngredientSerializer(many=True)
-
 
     class Meta:
         model = Recipe
