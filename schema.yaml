@@ -1,0 +1,1367 @@
+openapi: 3.0.3
+info:
+  title: Easi-Coolin-API
+  version: 0.1.0
+  description: Easy-Cookin API services to manae and store data from Easy-Cooking
+    project
+paths:
+  /api/{recipe_id}/comments/:
+    get:
+      operationId: api_comments_list
+      parameters:
+      - in: path
+        name: recipe_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
+          description: ''
+    post:
+      operationId: api_comments_create
+      parameters:
+      - in: path
+        name: recipe_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Comment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Comment'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+          description: ''
+  /api/{recipe_id}/comments/{comment_id}/reply/:
+    post:
+      operationId: api_comments_reply_create
+      parameters:
+      - in: path
+        name: comment_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      - in: path
+        name: recipe_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommentReply'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CommentReply'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CommentReply'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentReply'
+          description: ''
+  /api/{recipe_id}/comments/{comment_id}/reply/{id}:
+    get:
+      operationId: api_comments_reply_retrieve
+      parameters:
+      - in: path
+        name: comment_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this comment.
+        required: true
+      - in: path
+        name: recipe_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentReply'
+          description: ''
+    delete:
+      operationId: api_comments_reply_destroy
+      parameters:
+      - in: path
+        name: comment_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this comment.
+        required: true
+      - in: path
+        name: recipe_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/{recipe_id}/comments/{id}/:
+    get:
+      operationId: api_comments_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this comment.
+        required: true
+      - in: path
+        name: recipe_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+          description: ''
+    delete:
+      operationId: api_comments_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this comment.
+        required: true
+      - in: path
+        name: recipe_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/{recipe_id}/favorites/:
+    get:
+      operationId: api_favorites_list
+      parameters:
+      - in: path
+        name: recipe_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Favorite'
+          description: ''
+    post:
+      operationId: api_favorites_create
+      parameters:
+      - in: path
+        name: recipe_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Favorite'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Favorite'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Favorite'
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Favorite'
+          description: ''
+  /api/{recipe_id}/favorites/{id}/:
+    get:
+      operationId: api_favorites_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      - in: path
+        name: recipe_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Favorite'
+          description: ''
+    put:
+      operationId: api_favorites_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      - in: path
+        name: recipe_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Favorite'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Favorite'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Favorite'
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Favorite'
+          description: ''
+    patch:
+      operationId: api_favorites_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      - in: path
+        name: recipe_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedFavorite'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedFavorite'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedFavorite'
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Favorite'
+          description: ''
+    delete:
+      operationId: api_favorites_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      - in: path
+        name: recipe_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/accounts/:
+    get:
+      operationId: api_accounts_list
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Account'
+          description: ''
+    post:
+      operationId: api_accounts_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Account'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Account'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Account'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+          description: ''
+  /api/accounts/{id}/:
+    put:
+      operationId: api_accounts_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this account.
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          description: No response body
+    patch:
+      operationId: api_accounts_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this account.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUpdateAccount'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedUpdateAccount'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUpdateAccount'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateAccount'
+          description: ''
+  /api/login/:
+    post:
+      operationId: api_login_create
+      description: |-
+        Takes a set of user credentials and returns an access and refresh JSON web
+        token pair to prove the authentication of those credentials.
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginJWT'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/LoginJWT'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/LoginJWT'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginJWT'
+          description: ''
+  /api/profile/{id}/:
+    get:
+      operationId: api_profile_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this account.
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountDetails'
+          description: ''
+  /api/rating/{recipe_id}/:
+    get:
+      operationId: api_rating_list
+      parameters:
+      - in: path
+        name: recipe_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Rating'
+          description: ''
+    post:
+      operationId: api_rating_create
+      parameters:
+      - in: path
+        name: recipe_id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Rating'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Rating'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Rating'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rating'
+          description: ''
+  /api/recipe/:
+    get:
+      operationId: api_recipe_list
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Recipes'
+          description: ''
+    post:
+      operationId: api_recipe_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Recipes'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Recipes'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Recipes'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Recipes'
+          description: ''
+  /api/recipe/{id}/:
+    get:
+      operationId: api_recipe_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this recipe.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecipesUpdate'
+          description: ''
+    put:
+      operationId: api_recipe_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this recipe.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecipesUpdate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RecipesUpdate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/RecipesUpdate'
+        required: true
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecipesUpdate'
+          description: ''
+    patch:
+      operationId: api_recipe_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this recipe.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedRecipesUpdate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedRecipesUpdate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedRecipesUpdate'
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecipesUpdate'
+          description: ''
+    delete:
+      operationId: api_recipe_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        description: A UUID string identifying this recipe.
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/user/{username}/recipes/:
+    get:
+      operationId: api_user_recipes_list
+      parameters:
+      - in: path
+        name: username
+        schema:
+          type: string
+        required: true
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - tokenAuth: []
+      - basicAuth: []
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Recipes'
+          description: ''
+components:
+  schemas:
+    Account:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        last_login:
+          type: string
+          format: date-time
+          writeOnly: true
+          nullable: true
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        username:
+          type: string
+          maxLength: 50
+        password:
+          type: string
+          writeOnly: true
+          maxLength: 50
+        date_joined:
+          type: string
+          format: date-time
+          readOnly: true
+        date_updated:
+          type: string
+          format: date-time
+          readOnly: true
+        is_active:
+          type: boolean
+      required:
+      - date_joined
+      - date_updated
+      - email
+      - id
+      - password
+      - username
+    AccountDetails:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        recipes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Recipes'
+          readOnly: true
+        favorites:
+          type: array
+          items:
+            $ref: '#/components/schemas/Favorite'
+          readOnly: true
+        last_login:
+          type: string
+          format: date-time
+          writeOnly: true
+          nullable: true
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        username:
+          type: string
+          maxLength: 50
+        password:
+          type: string
+          writeOnly: true
+          maxLength: 50
+        date_joined:
+          type: string
+          format: date-time
+          readOnly: true
+        date_updated:
+          type: string
+          format: date-time
+          readOnly: true
+        is_active:
+          type: boolean
+      required:
+      - date_joined
+      - date_updated
+      - email
+      - favorites
+      - id
+      - password
+      - recipes
+      - username
+    CategoryEnum:
+      enum:
+      - Prato Principal
+      - Sobremesas
+      - Lanches
+      - Bebidas
+      - Não informado
+      type: string
+    Comment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        replies:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommentDetailReply'
+          readOnly: true
+        text:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        recipe:
+          type: string
+          format: uuid
+          readOnly: true
+        parent:
+          type: string
+          format: uuid
+          nullable: true
+        user:
+          type: string
+          format: uuid
+          readOnly: true
+      required:
+      - created_at
+      - id
+      - recipe
+      - replies
+      - text
+      - user
+    CommentDetailReply:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+      required:
+      - id
+    CommentReply:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        text:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        recipe:
+          type: string
+          format: uuid
+          readOnly: true
+        parent:
+          type: string
+          format: uuid
+          nullable: true
+        user:
+          type: string
+          format: uuid
+          readOnly: true
+      required:
+      - created_at
+      - id
+      - recipe
+      - text
+      - user
+    Favorite:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        recipe:
+          allOf:
+          - $ref: '#/components/schemas/RecipesRelationship'
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        user:
+          type: string
+          format: uuid
+          readOnly: true
+      required:
+      - created_at
+      - id
+      - recipe
+      - user
+    Ingredient:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        item:
+          type: string
+          maxLength: 255
+        recipe:
+          type: string
+          format: uuid
+          readOnly: true
+      required:
+      - id
+      - item
+      - recipe
+    LoginJWT:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+          writeOnly: true
+      required:
+      - password
+      - username
+    PatchedFavorite:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        recipe:
+          allOf:
+          - $ref: '#/components/schemas/RecipesRelationship'
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        user:
+          type: string
+          format: uuid
+          readOnly: true
+    PatchedRecipesUpdate:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        rating:
+          type: array
+          items:
+            $ref: '#/components/schemas/Rating'
+          readOnly: true
+        ingredients:
+          type: array
+          items:
+            $ref: '#/components/schemas/Ingredient'
+        title:
+          type: string
+          maxLength: 50
+        img:
+          type: string
+          maxLength: 512
+        preparation:
+          type: string
+        category:
+          $ref: '#/components/schemas/CategoryEnum'
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        user:
+          type: string
+          format: uuid
+          readOnly: true
+          nullable: true
+    PatchedUpdateAccount:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        last_login:
+          type: string
+          format: date-time
+          writeOnly: true
+          nullable: true
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        username:
+          type: string
+          maxLength: 50
+        password:
+          type: string
+          writeOnly: true
+          maxLength: 50
+        date_joined:
+          type: string
+          format: date-time
+          readOnly: true
+        date_updated:
+          type: string
+          format: date-time
+          readOnly: true
+        is_active:
+          type: boolean
+          readOnly: true
+    Rating:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        rating:
+          type: integer
+          maximum: 5
+          minimum: 1
+        user:
+          type: string
+          format: uuid
+          readOnly: true
+        recipe:
+          type: string
+          format: uuid
+          readOnly: true
+      required:
+      - id
+      - rating
+      - recipe
+      - user
+    Recipes:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        rating:
+          type: array
+          items:
+            $ref: '#/components/schemas/Rating'
+          readOnly: true
+        ingredients:
+          type: array
+          items:
+            $ref: '#/components/schemas/Ingredient'
+        username:
+          type: string
+          readOnly: true
+        title:
+          type: string
+          maxLength: 50
+        img:
+          type: string
+          maxLength: 512
+        preparation:
+          type: string
+        category:
+          $ref: '#/components/schemas/CategoryEnum'
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        user:
+          type: string
+          format: uuid
+          nullable: true
+      required:
+      - created_at
+      - id
+      - img
+      - ingredients
+      - preparation
+      - rating
+      - title
+      - username
+    RecipesRelationship:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        rating:
+          type: array
+          items:
+            $ref: '#/components/schemas/Rating'
+          readOnly: true
+        title:
+          type: string
+          maxLength: 50
+        img:
+          type: string
+          maxLength: 512
+        preparation:
+          type: string
+        category:
+          $ref: '#/components/schemas/CategoryEnum'
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        user:
+          type: string
+          format: uuid
+          nullable: true
+      required:
+      - created_at
+      - id
+      - img
+      - preparation
+      - rating
+      - title
+    RecipesUpdate:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        rating:
+          type: array
+          items:
+            $ref: '#/components/schemas/Rating'
+          readOnly: true
+        ingredients:
+          type: array
+          items:
+            $ref: '#/components/schemas/Ingredient'
+        title:
+          type: string
+          maxLength: 50
+        img:
+          type: string
+          maxLength: 512
+        preparation:
+          type: string
+        category:
+          $ref: '#/components/schemas/CategoryEnum'
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        user:
+          type: string
+          format: uuid
+          readOnly: true
+          nullable: true
+      required:
+      - created_at
+      - id
+      - img
+      - ingredients
+      - preparation
+      - rating
+      - title
+      - user
+    UpdateAccount:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        last_login:
+          type: string
+          format: date-time
+          writeOnly: true
+          nullable: true
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        username:
+          type: string
+          maxLength: 50
+        password:
+          type: string
+          writeOnly: true
+          maxLength: 50
+        date_joined:
+          type: string
+          format: date-time
+          readOnly: true
+        date_updated:
+          type: string
+          format: date-time
+          readOnly: true
+        is_active:
+          type: boolean
+          readOnly: true
+      required:
+      - date_joined
+      - date_updated
+      - email
+      - id
+      - is_active
+      - password
+      - username
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Token-based authentication with required prefix "Token"

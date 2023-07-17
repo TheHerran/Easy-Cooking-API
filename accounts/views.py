@@ -28,7 +28,6 @@ class RetrieveAccountsView(generics.RetrieveAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated, IsProfileOwner]
 
-    # lookup_field = "username"
     queryset = Account.objects.all()
     serializer_class = AccountDetailsSerializer
 
@@ -37,7 +36,6 @@ class UpdateAccountView(SerializerByMethodMixin, generics.UpdateAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated, IsProfileOwner]
 
-    # lookup_field = "username"
     queryset = Account.objects.all()
     serializer_map = {
         "PATCH": UpdateAccountSerializer,
